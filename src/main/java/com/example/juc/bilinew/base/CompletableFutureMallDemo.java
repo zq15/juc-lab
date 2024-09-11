@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 import lombok.Getter;
 
+// 电商比价案例
 public class CompletableFutureMallDemo {
     static List<NetMall> list = Arrays.asList(
             new NetMall("jd"),
