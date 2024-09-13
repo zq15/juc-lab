@@ -48,5 +48,22 @@ public class AwaitSingnalDemo {
                 lock.unlock();
             }
         }, "t2").start();
+
+        // 3s后 唤醒线程t1
+        // 演示可避免信号量丢失
+        try {
+            TimeUnit.SECONDS.sleep(3);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        new Thread(() -> {
+            lock.lock();
+            try {
+                condition.signal();
+                System.out.println(Thread.currentThread().getName() + "\t -----------发出通知");
+            } finally {
+                lock.unlock();
+            }
+        }, "t2").start();
     }
 }
