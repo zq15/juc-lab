@@ -9,7 +9,6 @@ public class CountDownLatchDemo {
         // 创建 CountDownLatch对象，设置初始值
         CountDownLatch countDownLatch = new CountDownLatch(6);
 
-
         // 六个同学陆续离开教室后
         for (int i = 1; i <= 6; i++) {
             new Thread(() -> {
