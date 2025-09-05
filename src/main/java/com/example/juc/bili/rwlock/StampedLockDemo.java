@@ -1,11 +1,9 @@
-package com.example.juc.bili.readwrite;
+package com.example.juc.bili.rwlock;
 
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.locks.ReadWriteLock;
-import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.concurrent.locks.StampedLock;
 
 class MyCache_stamped {

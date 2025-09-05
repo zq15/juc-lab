@@ -3,7 +3,7 @@ package com.example.juc.bilinew.stamplock;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.StampedLock;
 
-// 读写互斥模式
+// 乐观读模式
 public class StampedLockDemo1 {
     static int number = 37;
     static StampedLock stampedLock = new StampedLock();

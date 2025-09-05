@@ -9,14 +9,14 @@ import java.util.concurrent.atomic.AtomicReferenceFieldUpdater;
  */
 public class AtomicReferenceFieldUpdaterDemo {
 
-    public static void main(String[] args) {
-        MyVar myVar = new MyVar();
-        for (int i = 1; i <= 5; i++) {
-            new Thread(() -> {
-                myVar.init(myVar);
-            }, String.valueOf(i)).start();
-        }
-    }
+//    public static void main(String[] args) {
+//        MyVar myVar = new MyVar();
+//        for (int i = 1; i <= 5; i++) {
+//            new Thread(() -> {
+//                myVar.init(myVar);
+//            }, String.valueOf(i)).start();
+//        }
+//    }
 }
 /**
  * 1	--------------start init ,need 2 secondes

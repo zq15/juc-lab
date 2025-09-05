@@ -1,4 +1,4 @@
-package com.example.juc.bili.readwrite;
+package com.example.juc.bili.rwlock;
 
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.concurrent.TimeUnit;
