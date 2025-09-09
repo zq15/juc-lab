@@ -1,51 +1,35 @@
 package com.example.juc.bilinew.threadlocal;
 
-import java.util.Random;
-import java.util.concurrent.TimeUnit;
-
-class House {
-    int saleCount = 0;
-
-    public synchronized void saleHouse() {
-        saleCount++;
-    }
-
-    // 初始化
-    ThreadLocal<Integer> saleVolume = ThreadLocal.withInitial(() -> 0);
-
-    public void saleVolumeByThreadLocal() {
-        saleVolume.set(1 + saleVolume.get());
-    }
-
-}
-
+/**
+ * 使用ThreadLocal来创建线程隔离的线程安全变量
+ * 每个线程访问到的局部变量都是不一样的
+ */
 public class ThreadLocalDemo2 {
-    public static void main(String[] args) {
-        softReference();
+    private static ThreadLocal<String> threadLocal = new ThreadLocal<>();
+
+    private String content;
+
+    private String getContent() {
+        return threadLocal.get();
     }
 
-    private static void softReference() {
-        House house = new House();
-        for (int i = 1; i <= 5; i++) {
-            new Thread(() -> {
-                int size = new Random().nextInt(5) + 1;
-                try {
-                    for (int j = 1; j <= size; j++) {
-                        house.saleHouse();
-                        house.saleVolumeByThreadLocal();
-                    }
-                    System.out.println(Thread.currentThread().getName() + "\t" + "号销售卖出：" + house.saleVolume.get());
-                } finally {
-                    house.saleVolume.remove();
-                }
-            }, String.valueOf(i)).start();
+    private void setContent(String content) {
+        threadLocal.set(content);
+    }
 
+    public static void main(String[] args) {
+        ThreadLocalDemo2 demo = new ThreadLocalDemo2();
+        for (int i = 0; i < 5; i++) {
+            Thread thread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    demo.setContent(Thread.currentThread().getName() + "的数据");
+                    System.out.println(Thread.currentThread().getName() + "--->" + demo.getContent());
+                }
+            });
+            thread.setName("线程" + i);
+            thread.start();
         }
-        try {
-            TimeUnit.MILLISECONDS.sleep(300);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        System.out.println(Thread.currentThread().getName() + "\t" + "共计卖出多少套： " + house.saleCount);
     }
 }
+
