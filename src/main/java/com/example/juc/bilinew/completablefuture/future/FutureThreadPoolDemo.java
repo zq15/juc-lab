@@ -1,4 +1,4 @@
-package com.example.juc.bilinew.completablefuture;
+package com.example.juc.bilinew.completablefuture.future;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;

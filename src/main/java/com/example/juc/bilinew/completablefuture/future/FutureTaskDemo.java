@@ -1,10 +1,10 @@
-package com.example.juc.bilinew.completablefuture;
+package com.example.juc.bilinew.completablefuture.future;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.FutureTask;
 
 
-public class CompletabelFutureDemo {
+public class FutureTaskDemo {
     public static void main(String[] args) {
         FutureTask futureTask = new FutureTask(new MyThread2());
         new Thread(futureTask).start();
