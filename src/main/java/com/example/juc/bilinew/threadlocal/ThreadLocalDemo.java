@@ -1,7 +1,7 @@
  package com.example.juc.bilinew.threadlocal;
 
  /**
-  * 不同线程访问局部变量，存在线程安全问题
+  * 不同线程读写同一个局部变量，存在线程安全问题
   */
  public class ThreadLocalDemo {
      private String content;
