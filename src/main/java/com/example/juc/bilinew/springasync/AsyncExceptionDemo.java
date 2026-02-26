@@ -26,10 +26,17 @@ public class AsyncExceptionDemo {
 
         // ---- 案例 1：void 方法抛异常 ----
         System.out.println("===== 案例1：void 方法抛异常 =====");
-        System.out.println("调用方：调用 throwVoid，不会感知到异常");
-        service.throwVoid("void-task");
-        Thread.sleep(500); // 等异常处理器打印
-        System.out.println("调用方：继续执行，没有收到任何异常\n");
+        System.out.println("调用方：用 try-catch 包住调用，尝试捕获异常");
+        try {
+            service.throwVoid("void-task");
+            // 异步方法提交后立即返回，异常在另一个线程抛出，这里不会被触发
+            System.out.println("调用方：try 块正常执行完毕，没有捕获到任何异常");
+        } catch (Exception e) {
+            // 这行永远不会执行
+            System.out.println("调用方：catch 块被触发（不会出现这行）");
+        }
+        Thread.sleep(500); // 等异步线程中的异常日志打印出来
+        System.out.println("调用方：继续执行，catch 未被触发，异常由 Spring 内部处理\n");
 
         // ---- 案例 2：Future 方法抛异常 ----
         System.out.println("===== 案例2：Future 方法抛异常 =====");
